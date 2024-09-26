@@ -1,0 +1,10 @@
+{
+  "name": "myflix-client",
+  "version": "1.0.0",
+  "description": "The client side of a movie app, where users can register, view a list of movies and add movies to their favorites.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robert Ditler",
+  "license": "ISC"
+}
