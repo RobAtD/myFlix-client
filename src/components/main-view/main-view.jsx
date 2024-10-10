@@ -32,7 +32,6 @@ export const MainView = () => {
         let similarMovies = movies.filter((movie) => {
                 return movie.genre.Name == selectedMovie.genre.Name && movie.title != selectedMovie.title;
         });
-        console.log(similarMovies);
         return (
             <div>
                 <MovieView
