@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export const SignupView = () => {
     const [username, setUsername] = useState('');
@@ -36,11 +38,12 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
                     type="text"
+                    placeholder='Enter username'
                     value={username}
                     onChange={(e) => {
                         setUsername(e.target.value);
@@ -48,30 +51,32 @@ export const SignupView = () => {
                     minLength="5"
                     required
                 />
-            </label>
-            <label>
-                Email:
-                <input
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
                     type="email"
+                    placeholder='Enter email address'
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value);
                     }}
                     required
                 />
-            </label>
-            <label>
-                Password:
-                <input
+            </Form.Group>
+            <Form.Group controlId='formPassword'>
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
                     type="password"
+                    placeholder='Password'
                     value={password}
                     onChange={(e) => {
                         setPassword(e.target.value);
                     }}
                     required
                 />
-            </label>
-            <button type="submit">Signup</button>
-        </form>
+            </Form.Group>
+            <Button variant="primary" type="submit">Signup</Button>
+        </Form>
     );
 };

@@ -1,37 +1,33 @@
 import PropTypes from 'prop-types';
+import { CardBody } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Col from 'react-bootstrap/Col';
 
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-        <div>
-            <div>
-                <img src={movie.image} />
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.description}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{movie.genre.Name}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.director.Name}</span>
-            </div>
-            <div>
-                <span>Actors: </span>
-                <span>{movie.actors.join(', ')}</span>
-            </div>
-            <div>
-                <span>Release year: </span>
-                <span>{movie.releaseYear}</span>
-            </div>
-            <button onClick={onBackClick}>Back</button>
-        </div>
+        <Card className='mb-5'>
+            <Card.Img src={movie.image} />
+            <Card.Body>
+                <Card.Title>{movie.title}</Card.Title>
+                <Card.Text>{movie.description}</Card.Text>
+                <ListGroup>
+                    <ListGroup.Item>Genre: {movie.genre.Name}</ListGroup.Item>
+                    <ListGroup.Item>
+                        Director: {movie.director.Name}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        Actors: {movie.actors.join(', ')}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        Release year: {movie.releaseYear}
+                    </ListGroup.Item>
+                </ListGroup>
+
+                <Button className='mt-3' onClick={onBackClick}>Back</Button>
+            </Card.Body>
+        </Card>
     );
 };
 
