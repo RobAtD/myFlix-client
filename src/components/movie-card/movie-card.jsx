@@ -1,17 +1,33 @@
 import PropTypes from 'prop-types';
+import { Button, Card } from 'react-bootstrap';
 
-export const MovieCard = ({movie, onMovieClick})=> {
+export const MovieCard = ({ movie, onMovieClick }) => {
     return (
-        <div className='movie-card-container' onClick={()=> {
-            onMovieClick(movie);
-        }}>
-            <img className='img-card' src={movie.image}/>
-            <p><strong>{movie.title}</strong></p>
-            <p>{movie.description}</p>
-            <p>Genre: {movie.genre.Name}</p>
-        </div>
+        <Card className="h-100">
+            <Card.Img
+                variant="top"
+                src={movie.image}
+                onClick={() => {
+                    onMovieClick(movie);
+                }}
+            />
+            <Card.Body className="d-flex flex-column">
+                <Card.Title>{movie.title}</Card.Title>
+                <Card.Text>{movie.description}</Card.Text>
+                <p>Genre: {movie.genre.Name}</p>
+                <Button
+                    onClick={() => {
+                        onMovieClick(movie);
+                    }}
+                    variant="primary"
+                    className="w-100 mt-auto"
+                >
+                    Open
+                </Button>
+            </Card.Body>
+        </Card>
     );
-}
+};
 
 // defining all the props constraints for the MovieCard
 MovieCard.propTypes = {
@@ -21,8 +37,8 @@ MovieCard.propTypes = {
         image: PropTypes.string.isRequired,
         genre: PropTypes.shape({
             Name: PropTypes.string.isRequired,
-            Description: PropTypes.string.isRequired
+            Description: PropTypes.string.isRequired,
         }),
         // featured: PropTypes.bool.isRequired
-    })
-}
+    }),
+};

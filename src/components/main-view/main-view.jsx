@@ -3,11 +3,15 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     const storedToken = localStorage.getItem('token');
     const [movies, setMovies] = useState([]);
+    const [similarMovies, setSimilarMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -39,79 +43,84 @@ export const MainView = () => {
             });
     }, [token]);
 
-    // Show selected movie
-    if (selectedMovie) {
-        // Filters similar movies based on genre
-        let similarMovies = movies.filter((movie) => {
-            return (
-                movie.genre.Name == selectedMovie.genre.Name &&
-                movie.title != selectedMovie.title
-            );
-        });
-        return (
-            <div>
-                <MovieView
-                    movie={selectedMovie}
-                    onBackClick={() => {
-                        setSelectedMovie(null);
-                    }}
-                />
-                <hr />
-                <h2>Similar Movies</h2>
-                <div>
-                    {similarMovies.map((movie) => (
-                        <MovieCard
-                            key={movie.id}
-                            movie={movie}
-                            onMovieClick={(newSelectedMovie) => {
-                                setSelectedMovie(newSelectedMovie);
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (selectedMovie != null) {
+            const filteredMovies = movies.filter((movie) => {
+                return (
+                    movie.genre.Name == selectedMovie.genre.Name &&
+                    movie.title != selectedMovie.title
+                );
+            });
+            setSimilarMovies(filteredMovies);
+        }
+    }, [selectedMovie]);
 
-    if (!user) {
-        return (
-            <div>
-                <LoginView
-                    onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                    }}
-                />
-                or
-                <SignupView />
-            </div>
-        );
-    }
-
-    if (movies.length === 0) {
-        return <div>The list is empty!</div>;
-    } else {
-        return (
-            <div>
-                <button
-                    onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                >
-                    Logout
-                </button>
-                {movies.map((movie) => (
-                    <MovieCard
-                        key={movie.id}
-                        movie={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                            setSelectedMovie(newSelectedMovie);
+    return (
+        <Row className="justify-content-md-center">
+            {!user ? (
+                <Col md={5}>
+                    <LoginView
+                        onLoggedIn={(user, token) => {
+                            setUser(user);
+                            setToken(token);
                         }}
                     />
-                ))}
-            </div>
-        );
-    }
+                    or
+                    <SignupView />
+                </Col>
+            ) : selectedMovie ? ( // Show selected movie
+                <>
+                    <Col md={5}>
+                        <MovieView
+                            movie={selectedMovie}
+                            onBackClick={() => {
+                                setSelectedMovie(null);
+                            }}
+                        />
+                    </Col>
+                    <hr />
+                    <Col md={12}>
+                        <h2>Similar Movies</h2>
+                    </Col>
+                    {similarMovies.map((movie) => (
+                        <Col md={4} key={movie.id}>
+                            <MovieCard
+                                movie={movie}
+                                onMovieClick={(newSelectedMovie) => {
+                                    setSelectedMovie(newSelectedMovie);
+                                }}
+                            />
+                        </Col>
+                    ))}
+                </>
+            ) : movies.length === 0 ? (
+                <div>The list is empty!</div>
+            ) : (
+                <>
+                    <Col md={12}>
+                        <Button
+                            onClick={() => {
+                                setUser(null);
+                                setToken(null);
+                                localStorage.clear();
+                            }}
+                            className='mb-3 mt-3'
+                        >
+                            Logout
+                        </Button>
+                    </Col>
+                    {movies.map((movie) => (
+                        <Col className='mb-5' key={movie.id} md={4}>
+                            <MovieCard
+                                movie={movie}
+                                onMovieClick={(newSelectedMovie) => {
+                                    setSelectedMovie(newSelectedMovie);
+                                }}
+                            />
+                        </Col>
+                    ))}
+                </>
+            )}
+        </Row>
+    );
 };
