@@ -13190,7 +13190,7 @@ textarea.form-control-lg {
 
 h2, .h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .list-group-item {
@@ -13199,12 +13199,16 @@ h2, .h2 {
 
 Form {
   background-color: #696969;
-  border-radius: 10%;
-  margin-top: 20px;
+  border-radius: 2%;
+  margin: 20px 0;
   padding: 20px;
 }
 
 Form Button {
-  margin-top: 10px;
+  margin: 10px;
+}
+
+.navbar a {
+  color: #fff;
 }
 /*# sourceMappingURL=index.2212206d.css.map */

@@ -7,7 +7,7 @@ $card-bg: DimGray;
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .list-group-item {
@@ -16,10 +16,14 @@ h2 {
 
 Form {
     background-color: $card-bg;
-    margin-top: 20px;
+    margin: 20px 0;
     padding: 20px;
-    border-radius: 10%;
+    border-radius: 2%;
      Button {
-        margin-top: 10px;
+        margin: 10px;
      }
+}
+
+.navbar a {
+    color: white;
 }
