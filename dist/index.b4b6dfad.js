@@ -42170,14 +42170,7 @@ var _s = $RefreshSig$();
 const AddFavorite = ({ user, token, movie })=>{
     _s();
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)(user.FavoriteMovies);
-    // Dynamic Favorite Button
-    //const [buttonText, setButtonText] = useState(() => {
-    //     if (user.FavoriteMovies.includes(movie.id)) {
-    //         return 'Remove from Faves';
-    //     } else {
-    //         return 'Add to Faves';
-    //     }
-    // });
+    const [buttonText, setButtonText] = (0, _react.useState)(user.FavoriteMovies.includes(movie.id) ? "Remove from Favorites" : "Add to Favorites");
     const handleAdd = ()=>{
         const data = {
             FavoriteMovies: favoriteMovies
@@ -42192,13 +42185,13 @@ const AddFavorite = ({ user, token, movie })=>{
             return user.FavoriteMovies;
         };
         if (!user.FavoriteMovies.includes(movie.id)) {
-            //setButtonText('Remove from Faves');
             setFavoriteMovies(()=>addFavorites());
-            alert("Added to Favorites");
+            console.log(user.FavoriteMovies);
+        //alert('Added to Favorites');
         } else {
-            //setButtonText('Add to Faves');
             setFavoriteMovies(()=>removeFavorites());
-            alert("Removed from Favorites");
+            console.log(user.FavoriteMovies);
+        //alert('Removed from Favorites');
         }
         fetch(`https://robs-movie-api-981dce4af120.herokuapp.com/users/${encodeURIComponent(user.Username)}`, {
             method: "PUT",
@@ -42208,22 +42201,25 @@ const AddFavorite = ({ user, token, movie })=>{
             },
             body: JSON.stringify(data)
         }).then((response)=>{
-            if (response.ok) console.log("Update successfull");
-            else console.log("Update failed");
+            if (response.ok) {
+                console.log("Update successfull");
+                if (!user.FavoriteMovies.includes(movie.id)) setButtonText("Add to Favorites");
+                else setButtonText("Remove from Favorites");
+            } else console.log("Update failed");
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
         onClick: handleAdd,
         variant: "primary",
         className: "w-100 mt-auto",
-        children: "Favorite"
+        children: buttonText
     }, void 0, false, {
         fileName: "src/components/movie-card/add-favorite.jsx",
-        lineNumber: 65,
+        lineNumber: 67,
         columnNumber: 9
     }, undefined);
 };
-_s(AddFavorite, "gvsDwRw77EW379TZ2tyFDOZZ0oU=");
+_s(AddFavorite, "7vYTJbz+SE99VA1agW4Et/y2WMg=");
 _c = AddFavorite;
 var _c;
 $RefreshReg$(_c, "AddFavorite");

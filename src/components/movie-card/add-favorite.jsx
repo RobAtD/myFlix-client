@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 export const AddFavorite = ({ user, token, movie }) => {
     const [favoriteMovies, setFavoriteMovies] = useState(user.FavoriteMovies);
-    // Dynamic Favorite Button
-    //const [buttonText, setButtonText] = useState(() => {
-    //     if (user.FavoriteMovies.includes(movie.id)) {
-    //         return 'Remove from Faves';
-    //     } else {
-    //         return 'Add to Faves';
-    //     }
-    // });
+    const [buttonText, setButtonText] = useState(
+        user.FavoriteMovies.includes(movie.id)
+            ? 'Remove from Favorites'
+            : 'Add to Favorites'
+    );
 
     const handleAdd = () => {
         const data = {
@@ -31,13 +28,13 @@ export const AddFavorite = ({ user, token, movie }) => {
         };
 
         if (!user.FavoriteMovies.includes(movie.id)) {
-            //setButtonText('Remove from Faves');
             setFavoriteMovies(() => addFavorites());
-            alert('Added to Favorites');
+            console.log(user.FavoriteMovies);
+            //alert('Added to Favorites');
         } else {
-            //setButtonText('Add to Faves');
             setFavoriteMovies(() => removeFavorites());
-            alert('Removed from Favorites');
+            console.log(user.FavoriteMovies);
+            //alert('Removed from Favorites');
         }
 
         fetch(
@@ -55,6 +52,11 @@ export const AddFavorite = ({ user, token, movie }) => {
         ).then((response) => {
             if (response.ok) {
                 console.log('Update successfull');
+                if (!user.FavoriteMovies.includes(movie.id)) {
+                    setButtonText('Add to Favorites');
+                } else {
+                    setButtonText('Remove from Favorites');
+                }
             } else {
                 console.log('Update failed');
             }
@@ -63,7 +65,7 @@ export const AddFavorite = ({ user, token, movie }) => {
 
     return (
         <Button onClick={handleAdd} variant="primary" className="w-100 mt-auto">
-            Favorite
+            {buttonText}
         </Button>
     );
 };
