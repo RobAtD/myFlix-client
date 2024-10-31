@@ -1,30 +1,26 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { AddFavorite } from './add-favorite';
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, user, token }) => {
     return (
         <Card className="h-100">
-            <Card.Img
-                variant="top"
-                src={movie.image}
-                onClick={() => {
-                    onMovieClick(movie);
-                }}
-            />
+            <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+                <Card.Img variant="top" src={movie.image} />
+            </Link>
             <Card.Body className="d-flex flex-column">
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>{movie.description}</Card.Text>
                 <p>Genre: {movie.genre.Name}</p>
-                <Button
-                    onClick={() => {
-                        onMovieClick(movie);
-                    }}
-                    variant="primary"
-                    className="w-100 mt-auto"
-                >
+                    <AddFavorite user={user} token={token} movie={movie}/>
+            </Card.Body>
+            <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+                <Button variant="primary" className="w-100 mt-auto">
                     Open
                 </Button>
-            </Card.Body>
+            </Link>
         </Card>
     );
 };
