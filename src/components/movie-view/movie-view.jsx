@@ -7,30 +7,29 @@ import { SimilarMovies } from './similar-movies';
 export const MovieView = ({ user, movies, token }) => {
     const {movieID} = useParams();
 
-    const movie = movies.find((m)=> m.id === movieID);
-    const similarMovies = movies.find((s)=> s.genre.Name === movie.genre.Name);
+    const viewedMovie = movies.find((m)=> m.id === movieID);
     
     return (
         <Container>
             <Row className="justify-content-md-center">
                 <Col md={6}>
                     <Card className="mb-5">
-                        <Card.Img src={movie.image} />
+                        <Card.Img src={viewedMovie.image} />
                         <Card.Body>
-                            <Card.Title>{movie.title}</Card.Title>
-                            <Card.Text>{movie.description}</Card.Text>
+                            <Card.Title>{viewedMovie.title}</Card.Title>
+                            <Card.Text>{viewedMovie.description}</Card.Text>
                             <ListGroup>
                                 <ListGroup.Item>
-                                    Genre: {movie.genre.Name}
+                                    Genre: {viewedMovie.genre.Name}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Director: {movie.director.Name}
+                                    Director: {viewedMovie.director.Name}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Actors: {movie.actors.join(', ')}
+                                    Actors: {viewedMovie.actors.join(', ')}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Release year: {movie.releaseYear}
+                                    Release year: {viewedMovie.releaseYear}
                                 </ListGroup.Item>
                             </ListGroup>
                             <Link to="/">
@@ -44,7 +43,7 @@ export const MovieView = ({ user, movies, token }) => {
                         movies={movies}
                         user={user}
                         token={token}
-                        similarMovies={similarMovies}
+                        viewedMovie={viewedMovie}
                     />
                 </Row>
             </Row>

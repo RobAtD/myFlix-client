@@ -1,12 +1,12 @@
 import { MovieCard } from '../movie-card/movie-card';
 import { Col } from 'react-bootstrap';
 
-export const SimilarMovies = ({ user, token, movies, similarMovies }) => {
+export const SimilarMovies = ({ user, token, movies, viewedMovie }) => {
     
     const filteredMovies = movies.filter((movie) => {
                 return (
-                    movie.genre.Name === similarMovies.genre.Name &&
-                    movie.title != similarMovies.title    
+                    movie.genre.Name === viewedMovie.genre.Name &&
+                    movie.id !== viewedMovie.id   
                 );
             });
 
