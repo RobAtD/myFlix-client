@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { AddFavorite } from './add-favorite';
+import { FavoriteButton } from '../favorite-button/favorite-button';
 
 export const MovieCard = ({ movie, user, token }) => {
     return (
@@ -14,7 +14,7 @@ export const MovieCard = ({ movie, user, token }) => {
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>{movie.description}</Card.Text>
                 <p>Genre: {movie.genre.Name}</p>
-                    <AddFavorite user={user} token={token} movie={movie}/>
+                    <FavoriteButton user={user} movie={movie} token={token}/>
             </Card.Body>
             <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                 <Button variant="primary" className="w-100 mt-auto">

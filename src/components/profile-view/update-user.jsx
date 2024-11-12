@@ -18,6 +18,7 @@ export const UpdateUser = ({ user, token }) => {
             Birthday: birthday,
         };
 
+        // Filter key values, that hadn't been changed so that only new values will be canged through PUT
         let newData = Object.keys(data)
         .filter((k)=> data[k] != '')
         .reduce((a, k)=> ({ ...a, [k]: data[k]}), {});
@@ -37,10 +38,8 @@ export const UpdateUser = ({ user, token }) => {
         ).then((response) => {
             if (response.ok) {
                 alert('Update successfull');
-                console.log(JSON.stringify(newData));
             } else {
                 alert('Update failed');
-                console.log(JSON.stringify(newData));
             }
         });
     };

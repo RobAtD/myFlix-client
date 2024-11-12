@@ -3,8 +3,10 @@ import {useParams} from 'react-router';
 import {Card, ListGroup, Button, Container, Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { SimilarMovies } from './similar-movies';
+import { useSelector } from 'react-redux';
 
-export const MovieView = ({ user, movies, token }) => {
+export const MovieView = ({ user, token }) => {
+    const movies = useSelector((state)=> state.movies.list);
     const {movieID} = useParams();
 
     const viewedMovie = movies.find((m)=> m.id === movieID);
