@@ -7,7 +7,9 @@ export const UserInfo = ({ user }) => {
             <ListGroup>
                 <ListGroup.Item>Name: {user.Username}</ListGroup.Item>
                 <ListGroup.Item>Email: {user.Email}</ListGroup.Item>
-                <ListGroup.Item>Birthday: {user.Birthday}</ListGroup.Item>
+                <ListGroup.Item>
+                    Birthday: {new Date(user.Birthday).toISOString().slice(0, 10)}
+                </ListGroup.Item>
             </ListGroup>
         </>
     );
