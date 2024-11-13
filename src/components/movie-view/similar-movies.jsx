@@ -1,7 +1,10 @@
 import { MovieCard } from '../movie-card/movie-card';
 import { Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-export const SimilarMovies = ({ user, token, movies, viewedMovie }) => {
+export const SimilarMovies = ({ token, viewedMovie }) => {
+    const user = useSelector((state)=> state.user);
+    const movies = useSelector((state)=> state.movies.list);
     
     const filteredMovies = movies.filter((movie) => {
                 return (

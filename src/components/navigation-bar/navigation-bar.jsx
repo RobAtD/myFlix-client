@@ -1,9 +1,9 @@
-import {Navbar, Container, Nav} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export const NavigationBar = ({ onLoggedOut})=> {
-    const user = useSelector((state)=> state.user);
+export const NavigationBar = ({ onLoggedOut }) => {
+    const user = useSelector((state) => state.user);
 
     return (
         <Navbar bg="primary" expand="lg">
@@ -47,4 +47,4 @@ export const NavigationBar = ({ onLoggedOut})=> {
             </Container>
         </Navbar>
     );
-}
+};

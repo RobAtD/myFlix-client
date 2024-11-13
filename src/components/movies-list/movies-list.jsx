@@ -5,7 +5,7 @@ import { MoviesFilter } from '../movies-filter/movies-filter';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-export const MoviesList = ({user, token}) => {
+export const MoviesList = ({ token }) => {
     const movies = useSelector((state) => state.movies.list);
     const filter = useSelector((state) => state.movies.filter)
         .trim()
@@ -27,7 +27,6 @@ export const MoviesList = ({user, token}) => {
                     filteredMovies.map((movie) => (
                         <Col className="mb-5" key={movie.id} md={4}>
                             <MovieCard
-                                user={user}
                                 token={token}
                                 movie={movie}
                             />

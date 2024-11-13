@@ -1,6 +1,9 @@
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-export const DeleteUser = ({ user, token }) => {
+export const DeleteUser = ({ token }) => {
+    const user = useSelector((state) => state.user);
+
     const handleDelete = () => {
         if (confirm('Are you sure you want to delete your profile?') === true) {
             console.log('Confirmed');

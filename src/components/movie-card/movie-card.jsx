@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 
-export const MovieCard = ({ movie, user, token }) => {
+export const MovieCard = ({ movie, token }) => {
     return (
         <Card className="h-100">
             <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
@@ -14,7 +14,7 @@ export const MovieCard = ({ movie, user, token }) => {
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>{movie.description}</Card.Text>
                 <p>Genre: {movie.genre.Name}</p>
-                    <FavoriteButton user={user} movie={movie} token={token}/>
+                    <FavoriteButton movie={movie} token={token}/>
             </Card.Body>
             <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
                 <Button variant="primary" className="w-100 mt-auto">

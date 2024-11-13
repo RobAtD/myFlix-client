@@ -1,6 +1,8 @@
 import { ListGroup } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-export const UserInfo = ({ user }) => {
+export const UserInfo = () => {
+    const user = useSelector((state) => state.user);
     return (
         <>
             <h2>{user.Username}'s Profile Information</h2>
@@ -8,7 +10,10 @@ export const UserInfo = ({ user }) => {
                 <ListGroup.Item>Name: {user.Username}</ListGroup.Item>
                 <ListGroup.Item>Email: {user.Email}</ListGroup.Item>
                 <ListGroup.Item>
-                    Birthday: {new Date(user.Birthday).toISOString().slice(0, 10)}
+                    Birthday:
+                    {user.Birthday
+                        ? new Date(user.Birthday).toISOString().slice(0, 10)
+                        : 'No birthday'}
                 </ListGroup.Item>
             </ListGroup>
         </>
