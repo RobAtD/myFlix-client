@@ -1,7 +1,11 @@
 import { MovieCard } from '../movie-card/movie-card';
 import { Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-export const FavoriteMovies = ({ user, movies, token }) => {
+export const FavoriteMovies = ({ token }) => {
+    const user = useSelector((state) => state.user);
+    const movies = useSelector((state) => state.movies.list);
+
     let favoriteMovies = movies.filter((m) =>
         user.FavoriteMovies.includes(m.id)
     );

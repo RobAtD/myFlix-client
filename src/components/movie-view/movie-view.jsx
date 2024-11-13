@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import { SimilarMovies } from './similar-movies';
 import { useSelector } from 'react-redux';
 
-export const MovieView = ({ user, token }) => {
+export const MovieView = ({ token }) => {
     const movies = useSelector((state)=> state.movies.list);
     const {movieID} = useParams();
 
@@ -42,8 +42,6 @@ export const MovieView = ({ user, token }) => {
                 </Col>
                 <Row>
                     <SimilarMovies
-                        movies={movies}
-                        user={user}
                         token={token}
                         viewedMovie={viewedMovie}
                     />
